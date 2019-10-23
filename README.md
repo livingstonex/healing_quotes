@@ -1,6 +1,6 @@
 # Healing Quotes
 
-A Flutter project for using words to healing broken people and the struggling soul.
+A Flutter project for using words to healing broken people and the struggling soul. Entire design, takes the minimalist design approach.
 
 ## Getting Started
 Not for public Use, Thank you!
