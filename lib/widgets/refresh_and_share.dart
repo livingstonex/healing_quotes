@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quotes/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+
 
 class RefreshAndShare extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class RefreshAndShare extends StatefulWidget {
 }
 
 class _RefreshAndShareState extends State<RefreshAndShare> {
+
+  String quote;
+  String author;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,10 +26,19 @@ class _RefreshAndShareState extends State<RefreshAndShare> {
               print("meeee");
              var res = await CallApi().getQod();
              var body = json.decode(res.body);
-              print(body);
-             if(body['success']){
 
+             //print(body['contents']['quotes'][0]['quote']);
+             if(body['success']['total'] == 1){
+               //save qod in shared preference
+               SharedPreferences storage = await SharedPreferences.getInstance();
+               storage.setString('qod', body['contents']['quotes'][0]['quote']);
+               storage.setString('author', body['contents']['quotes'][0]['author']);
+             }else{
+               print('Sorry, Please connect your phone to the internet! Thank You.');
              }
+
+
+
             },
             child: new Container(
                 decoration: BoxDecoration(
